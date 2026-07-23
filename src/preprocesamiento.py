@@ -51,7 +51,7 @@ def preparar_entrada_usuario(estacion_id, sentido, fecha_str, le_estacion):
 
 
 def estimar_posibilidad_atasco(df_agrupado, estacion, sentido, fecha_hora, prediccion):
-    # Tomamos como referencia el comportamiento histórico del mismo tramo y sentido.
+    # Tomamos como referencia el comportamiento del mismo tramo y sentido.
     fecha_hora = pd.to_datetime(fecha_hora)
     hora = fecha_hora.hour
 
