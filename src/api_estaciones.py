@@ -1,7 +1,7 @@
 import requests
-import pandas as pd 
+import pandas as pd
 
-def cargar_datos_api(url, id_paquete):
+def cargar_estaciones_aforo(url, id_paquete):
   endpoint = f"{url}/api/3/action/package_show"
   respuesta = requests.get(endpoint, params={"id": id_paquete}, timeout=20)
 
@@ -18,14 +18,14 @@ def cargar_datos_api(url, id_paquete):
   recursos = datos_json.get('result', {}).get('resources', [])
   url_descarga = None
 
-  # Dado que el paquete puede tener recursos en JSON y TXT, buscamos solo el recurso TXT que viene en formato CSV.
+  # El recurso CSV contiene la geometría y los campos de localización que necesitamos para el mapa.
   for recurso in recursos:
-    if recurso.get('format', '').upper() == 'TXT':
+    if recurso.get('format', '').upper() == 'CSV':
       url_descarga = recurso.get('url')
       break
-  
+
   if not url_descarga:
-    raise ValueError("No se encontró ningún fichero de datos TXT")
+    raise ValueError("No se encontró ningún fichero CSV")
 
   df = pd.read_csv(url_descarga)
 
