@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 
+
 def cargar_estaciones_aforo(url, id_paquete):
   endpoint = f"{url}/api/3/action/package_show"
   respuesta = requests.get(endpoint, params={"id": id_paquete}, timeout=20)
@@ -25,7 +26,7 @@ def cargar_estaciones_aforo(url, id_paquete):
       break
 
   if not url_descarga:
-    raise ValueError("No se encontró ningún fichero CSV")
+    raise ValueError("No se encontró ningún fichero CSV con las estaciones de aforo")
 
   df = pd.read_csv(url_descarga)
 
