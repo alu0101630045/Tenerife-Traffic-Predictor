@@ -10,9 +10,13 @@ __pycache__/
 *.txt
 *.csv
 *.dat
+!requirements.txt
+!runtime.txt
 
 # Variables de entorno 
 .env
 
 # Archivos de Streamlit
 .streamlit/
+!.streamlit/
+!.streamlit/config.toml
